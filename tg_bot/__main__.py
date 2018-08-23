@@ -25,9 +25,9 @@ I'm a group manager bot maintained by [this wonderful person](tg://user?id={}). 
 python-telegram-bot library, and am fully opensource - you can find what makes me tick \
 [here](github.com/PaulSonOfLars/tgbot)!
 
-Feel free to submit pull requests on github, or to contact my support group, @MarieSupport, with any bugs, questions \
+Feel free to submit pull requests on github, or to contact my support group, @ihindi, with any bugs, questions \
 or feature requests you might have :)
-I also have a news channel, @MarieNews for announcements on new features, downtime, etc.
+I also have a news channel, @bfcanal for announcements on new features, downtime, etc.
 
 You can find the list of available commands with /help.
 
@@ -53,10 +53,10 @@ And the following:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
-It took lots of work for [my creator](t.me/SonOfLars) to get me to where I am now, and every donation helps \
+It took lots of work for [my creator](t.me/hacker_la) to get me to where I am now, and every donation helps \
 motivate him to make me even better. All the donation money will go to a better VPS to host me, and/or beer \
 (see his bio!). He's just a poor student, so every little helps!
-There are two ways of paying him; [PayPal](paypal.me/PaulSonOfLars), or [Monzo](monzo.me/paulnionvestergaardlarsen)."""
+There are one ways of paying him; [PayPal](paypal.me/irfan0859)."""
 
 IMPORTED = {}
 MIGRATEABLE = []
