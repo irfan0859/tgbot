@@ -1,7 +1,3 @@
-# https://github.com/AliHasan96/jarvis_tgbot/blob/master/tg_bot/modules/ud.py
-
-from typing import List
-
 from telegram import Update, Bot
 from telegram.ext import run_async
 
@@ -11,17 +7,11 @@ from tg_bot import dispatcher
 from requests import get
 
 @run_async
-def ud(bot: Bot, update: Update, args: List[str]):
+def ud(bot: Bot, update: Update):
   message = update.effective_message
-  text = ' '.join(args)
-
+  text = message.text[len('/ud '):]
   results = get(f'http://api.urbandictionary.com/v0/define?term={text}').json()
-
-  word = results['list'][0]['word']
-  definition = results['list'][0]['definition']
-  example = results['list'][0]['example']
-
-  reply_text = f'Word: {word}\nDefinition: {definition}\n\nExample:\n{example}'
+  reply_text = f'Word: {text}\nDefinition: {results["list"][0]["definition"]}'
   message.reply_text(reply_text)
 
 __help__ = """
