@@ -14,12 +14,11 @@ def translate(bot: Bot, update: Update):
   message = update.effective_message
   text = message.reply_to_message.text
 
-  if text:
-    translation = get(f'{base_url}?key={api_key}&text={text}&lang=en').json()
+  translation = get(f'{base_url}?key={api_key}&text={text}&lang=en').json()
   
-    reply_text = f"Language: {translation['lang']}\nText: {translation['text'][0]}"
+  reply_text = f"Language: {translation['lang']}\nText: {translation['text'][0]}"
   
-    message.reply_to_message.reply_text(reply_text)
+  message.reply_to_message.reply_text(reply_text)
 
 translate_handler = DisableAbleCommandHandler('translate', translate)
 
