@@ -7,18 +7,19 @@ from tg_bot.modules.disable import DisableAbleCommandHandler
 from tg_bot import dispatcher
 
 base_url = 'https://translate.yandex.net/api/v1.5/tr.json/translate'
-api_key = 'trnsl.1.1.20180827T221623Z.500826e7bd7be08e.4037211ea0fe043d17e807929bfa99f07e3eecc5
-'
+api_key = 'trnsl.1.1.20180827T221623Z.500826e7bd7be08e.4037211ea0fe043d17e807929bfa99f07e3eecc5'
 
 @run_async
 def translate(bot: Bot, update: Update):
   message = update.effective_message
   text = message.reply_to_message.text
-  translation = get(f'{base_url}?key={api_key}&text={text}&lang=en').json()
+
+  if text:
+    translation = get(f'{base_url}?key={api_key}&text={text}&lang=en').json()
   
-  reply_text = f"Language: {translation['lang']}\nText: {translation['text'][0]}"
+    reply_text = f"Language: {translation['lang']}\nText: {translation['text'][0]}"
   
-  message.reply_to_message.reply_text(reply_text)
+    message.reply_to_message.reply_text(reply_text)
 
 translate_handler = DisableAbleCommandHandler('translate', translate)
 
