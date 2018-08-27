@@ -1,59 +1,25 @@
-import json
-from pprint import pprint
+from telegram import Message, Update, Bot, User
+from telegram.ext import Filters, MessageHandler, run_async
 
-import requests
-from telegram import Update, Bot
-from telegram.ext import CommandHandler
+from requests import get
 
+from tg_bot.modules.disable import DisableAbleCommandHandler
 from tg_bot import dispatcher
 
-# Open API key
-API_KEY = "6ae0c3a0-afdc-4532-a810-82ded0054236"
-URL = "http://services.gingersoftware.com/Ginger/correct/json/GingerTheText"
+base_url = 'https://translate.yandex.net/api/v1.5/tr.json/translate'
+api_key = 'trnsl.1.1.20180827T221623Z.500826e7bd7be08e.4037211ea0fe043d17e807929bfa99f07e3eecc5
+'
 
-
+@run_async
 def translate(bot: Bot, update: Update):
-    if update.effective_message.reply_to_message:
-        msg = update.effective_message.reply_to_message
+  message = update.effective_message
+  text = message.reply_to_message.text
+  translation = get(f'{base_url}?key={api_key}&text={text}&lang=en').json()
+  
+  reply_text = f"Language: {translation['lang']}\nText: {translation['text'][0]}"
+  
+  message.reply_to_message.reply_text(reply_text)
 
-        params = dict(
-            lang="US",
-            clientVersion="2.0",
-            apiKey=API_KEY,
-            text=msg.text
-        )
+translate_handler = DisableAbleCommandHandler('translate', translate)
 
-        res = requests.get(URL, params=params)
-        # print(res)
-        # print(res.text)
-        pprint(json.loads(res.text))
-        changes = json.loads(res.text).get('LightGingerTheTextResult')
-        curr_string = ""
-
-        prev_end = 0
-
-        for change in changes:
-            start = change.get('From')
-            end = change.get('To') + 1
-            suggestions = change.get('Suggestions')
-            if suggestions:
-                sugg_str = suggestions[0].get('Text')  # should look at this list more
-                curr_string += msg.text[prev_end:start] + sugg_str
-
-                prev_end = end
-
-        curr_string += msg.text[prev_end:]
-        print(curr_string)
-        update.effective_message.reply_text(curr_string)
-
-
-__help__ = """
- - /t: while replying to a message, will reply with a grammar corrected version
-"""
-
-__mod_name__ = "Translator"
-
-
-TRANSLATE_HANDLER = CommandHandler('t', translate)
-
-dispatcher.add_handler(TRANSLATE_HANDLER)
+dispatcher.add_handler(translate_handler)
