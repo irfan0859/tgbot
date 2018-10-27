@@ -3,7 +3,7 @@ class Config(object):
     LOGGER = True
 
     # REQUIRED
-    API_KEY = "YOUR KEY HERE"
+    API_KEY = "520445002:AAHZqc5WV2f0_N_rvIQ4guKcyIqYsDLptjs"
     OWNER_ID = "465511496"  # If you dont know, run the bot and do /id in your private chat with it
     OWNER_USERNAME = "hacker_la"
 
@@ -17,11 +17,11 @@ class Config(object):
 
     # OPTIONAL
     SUDO_USERS = [465511496]  # List of id's (not usernames) for users which have sudo access to the bot.
-    SUPPORT_USERS = 465511496[]  # List of id's (not usernames) for users which are allowed to gban, but can also be banned.
+    SUPPORT_USERS = [465511496]  # List of id's (not usernames) for users which are allowed to gban, but can also be banned.
     WHITELIST_USERS = [465511496]  # List of id's (not usernames) for users which WONT be banned/kicked by the bot.
     DONATION_LINK = None  # EG, paypal
     CERT_PATH = None
-    PORT = 5000
+    PORT = 8443
     DEL_CMDS = True  # Whether or not you should delete "blue text must click" commands
     STRICT_GBAN = True
     WORKERS = 8  # Number of subthreads to use. This is the recommended amount - see for yourself what works best!
